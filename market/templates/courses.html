@@ -2,6 +2,67 @@
 
 {% block title %}Courses{% endblock %}
 
+{% block style %}
+<style>
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #f1f1f1;
+}
+
+h1 { font-weight: 600; letter-spacing: 1px; }
+
+.course-card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #2f3949;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+
+.course-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: #fdfdfd;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.card-text {
+    color: #fcfcfc;
+    font-size: 0.95rem;
+}
+
+.price-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #198754, #145c32);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.add-btn {
+    border-radius: 10px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #145c32 !important;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center text-light">Available Courses</h1>
