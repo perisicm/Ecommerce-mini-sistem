@@ -2,23 +2,101 @@
 
 {% block title %}Courses{% endblock %}
 
+{% block style %}
+<style>
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #f1f1f1;
+}
+
+h1 { font-weight: 600; letter-spacing: 1px; }
+
+.course-card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #2f3949;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+
+.course-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: #fdfdfd;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.card-text {
+    color: #fcfcfc;
+    font-size: 0.95rem;
+}
+
+.price-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #198754, #145c32);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.add-btn {
+    border-radius: 10px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #145c32 !important;
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-    <h1 class="text-center text-light">Available Courses</h1>
-    <div class="row mt-4">
-        {% for item in items %}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ item.name }}</h5>
-                    <p class="card-text">{{ item.description }}</p>
-                    <p>${{ item.price }}</p>
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 80vh;">
+
+    <h1 class="text-center mt-4 text-light">Available Courses</h1>
+
+    <div class="container mt-5">
+        <div class="row">
+            {% for item in items %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow course-card">
+
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                         class="card-img-top"
+                         alt="{{ item.name }}">
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-center">{{ item.name }}</h5>
+                        <p class="card-text text-center mb-3">{{ item.description }}</p>
+
+                        <div class="mt-auto text-center">
+                            <div class="price-badge mb-3">
+                                ${{ "%.2f"|format(item.price) }}
+                            </div>
+                            <button class="btn btn-success w-100 add-btn">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% else %}
-            <p class="text-light text-center">Nema kurseva trenutno.</p>
-        {% endfor %}
     </div>
+
 </div>
 {% endblock %}

@@ -2,6 +2,35 @@
 
 {% block title %}Cart{% endblock %}
 
+{% block style %}
+<style>
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+.cart-card {
+    background: #2f3949;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.remove-btn {
+    background: #dc3545;
+    border: none;
+}
+
+.remove-btn:hover { background: #a71d2a; }
+
+.total-box {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #198754;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
     <h2 class="text-light text-center">Your Cart</h2>
