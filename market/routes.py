@@ -1,14 +1,18 @@
-from market import app
-from flask import render_template
+from market import app, db
+from flask import render_template, redirect, url_for, flash, session, request
+from market.models import Item
+
 
 @app.route('/')
 @app.route('/home')
 def home_page():
     return render_template('home.html')
 
+
 @app.route('/courses')
 def courses_page():
-    return render_template('courses.html', items=[])
+    items = Item.query.all()
+    return render_template('courses.html', items=items)
 
 
 @app.route('/cart', methods=['GET', 'POST'])
