@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Register Page{% endblock %}
+
+{% block style %}
+<style>
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #ffffff;
+}
+
+.register-card {
+    background: #2f3949;
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+
+.register-card label,
+.register-card .form-label {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.register-card input,
+.register-card .form-control {
+    background-color: #1f2937 !important;
+    border: 1px solid #34495e !important;
+    color: #ffffff !important;
+}
+
+.register-card input::placeholder {
+    color: #cfd8e3 !important;
+    opacity: 1;
+}
+
+.register-card input:focus,
+.register-card .form-control:focus {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 2px #198754 !important;
+}
+
+.btn-custom {
+    background: linear-gradient(135deg, #198754, #145c32);
+    border: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+    color: white;
+}
+
+.btn-custom:hover {
+    background: #145c32;
+    transform: translateY(-2px);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-6">
+        <div class="register-card">
+            <h2 class="text-center mb-4">Create Account</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control", placeholder="Enter username") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.email_address.label(class="form-label") }}
+                    {{ form.email_address(class="form-control", placeholder="Enter email") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.password1.label(class="form-label") }}
+                    {{ form.password1(class="form-control", placeholder="Enter password") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.password2.label(class="form-label") }}
+                    {{ form.password2(class="form-control", placeholder="Confirm password") }}
+                </div>
+
+                <div class="d-grid mt-4">
+                    {{ form.submit(class="btn btn-custom btn-lg") }}
+                </div>
+
+                <div class="text-center mt-3">
+                    <small>Already have an account?
+                        <a href="{{ url_for('login_page') }}" class="text-success">Login here</a>
+                    </small>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
