@@ -21,7 +21,9 @@ body {
     border: none;
 }
 
-.remove-btn:hover { background: #a71d2a; }
+.remove-btn:hover { 
+    background: #a71d2a; 
+}
 
 .total-box {
     font-size: 1.3rem;
@@ -33,17 +35,38 @@ body {
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-light text-center">Your Cart</h2>
+    <div class="cart-card">
+        <h2 class="mb-4 text-center">Your Cart</h2>
 
-    {% if cart_items %}
-    <ul>
-        {% for item in cart_items %}
-        <li class="text-light">{{ item.name }} — ${{ item.price }}</li>
-        {% endfor %}
-    </ul>
-    <p class="text-light">Total: ${{ total_price }}</p>
-    {% else %}
-        <p class="text-light text-center">Korpa je prazna.</p>
-    {% endif %}
+        {% if cart_items %}
+        <form method="POST">
+            {% for item in cart_items %}
+            <div class="d-flex justify-content-between align-items-center mb-3 p-3 bg-dark rounded">
+                <div>
+                    <input type="checkbox" name="selected_items" value="{{ item.id }}" checked>
+                    <strong>{{ item.name }}</strong>
+                    <div>${{ "%.2f"|format(item.price) }}</div>
+                </div>
+                <a href="{{ url_for('remove_from_cart', item_id=item.id) }}" 
+                   class="btn remove-btn btn-sm">X</a>
+            </div>
+            {% endfor %}
+
+            <hr>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="total-box">
+                    Total: ${{ "%.2f"|format(total_price) }}
+                </div>
+                <button type="submit" class="btn btn-success">
+                    Buy Selected
+                </button>
+            </div>
+        </form>
+
+        {% else %}
+            <p class="text-center">Your cart is empty.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

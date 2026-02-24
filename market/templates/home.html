@@ -2,9 +2,169 @@
 
 {% block title %}Home{% endblock %}
 
+{% block style %}
+<style>
+.hero-section {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInTitle 1.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInTitle {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.read-btn {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #198754, #145c32);
+    border: none;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 40px;
+    transition: 0.3s;
+}
+
+.read-btn:hover {
+    transform: translateY(-3px);
+    background: #145c32;
+}
+
+.hero-description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+.tech-strip {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.tech-strip img {
+    width: 70px;
+    margin: 30px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.tech-strip img:nth-child(2) { animation-delay: 1s; }
+.tech-strip img:nth-child(3) { animation-delay: 2s; }
+.tech-strip img:nth-child(4) { animation-delay: 3s; }
+.tech-strip img:nth-child(5) { animation-delay: 4s; }
+.tech-strip img:nth-child(6) { animation-delay: 5s; }
+
+@keyframes float {
+    0%   { transform: translateY(0px) translateX(0px); }
+    25%  { transform: translateY(-15px) translateX(10px); }
+    50%  { transform: translateY(0px) translateX(20px); }
+    75%  { transform: translateY(15px) translateX(10px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+.info-section {
+    padding: 90px 0;
+}
+
+.info-box {
+    background: #2f3949;
+    padding: 35px;
+    border-radius: 20px;
+    transition: 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.info-box h4 {
+    color: white;
+    font-weight: 700;
+}
+
+.info-box p {
+    color: #e0e0e0;
+    margin-top: 10px;
+}
+
+.info-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-    <h1>Full Stack Development Courses</h1>
-    <p>Learn HTML, CSS, Flask, Python and more.</p>
+<div class="container hero-section">
+    <div class="row w-100 align-items-center">
+
+        <div class="col-md-6 text-start">
+            <div class="hero-title">
+                FULL STACK DEVELOPMENT AND DESIGN COURSES
+            </div>
+            <a href="{{ url_for('courses_page') }}" class="btn read-btn">
+                Explore Courses
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <p class="hero-description">
+                Don't worry if you're a beginner. We offer carefully structured
+                courses from beginner to advanced level.
+            </p>
+            <p class="hero-description mt-3">
+                Learn HTML, CSS, TypeScript, Flask, Python and Docker
+                with practical real-world projects.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div class="container tech-strip">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg">
+</div>
+
+<div class="container info-section">
+    <div class="row text-center">
+
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="info-box w-100">
+                <h4>Project-Based Learning</h4>
+                <p>Every course includes real-world projects.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="info-box w-100">
+                <h4>Modern Tech Stack</h4>
+                <p>Learn Flask, Docker, SQL and modern frontend tools.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="info-box w-100">
+                <h4>Career Ready</h4>
+                <p>Build portfolio projects and prepare for developer jobs.</p>
+            </div>
+        </div>
+
+    </div>
 </div>
 {% endblock %}

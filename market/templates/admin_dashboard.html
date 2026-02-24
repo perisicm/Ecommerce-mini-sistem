@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block style %}
+<style>
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #ffffff;
+}
+
+.stat-card {
+    background: rgba(47, 57, 73, 0.85);
+    border-radius: 20px;
+    padding: 30px;
+    transition: 0.35s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
+
+.stat-title {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9fb3c8;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.top-user-item {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #198754;
+    margin-bottom: 6px;
+}
+
+.form-card {
+    background: rgba(47, 57, 73, 0.9);
+    border-radius: 20px;
+    padding: 35px;
+    margin-top: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.form-label { 
+    color: #ffffff; 
+    font-weight: 500; 
+}
+
+.form-control {
+    background-color: #1f2937;
+    border: none;
+    color: #ffffff;
+}
+
+.form-control::placeholder { 
+    color: #bfc9d4; 
+}
+
+.form-control:focus {
+    background-color: #1f2937;
+    color: #ffffff;
+    box-shadow: 0 0 0 2px #198754;
+}
+
+.btn-admin {
+    background: linear-gradient(135deg, #198754, #145c32);
+    border: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-admin:hover {
+    background: #145c32;
+    transform: translateY(-3px);
+}
+
+.course-list {
+    background: rgba(47, 57, 73, 0.9);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.course-item {
+    background: #1f2937;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+    color: white;
+}
+
+.course-item:hover {
+    background: #263445;
+    transform: translateX(5px);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrapper">
+
+    <h2 class="mb-5 text-center fw-bold">Admin Dashboard</h2>
+
+    <!-- STATISTIKE -->
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-title">TOTAL USERS</div>
+                <div class="stat-number text-success">{{ total_users }}</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-title">TOTAL COURSES</div>
+                <div class="stat-number text-info">{{ total_courses }}</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-title">TOTAL REVENUE</div>
+                <div class="stat-number text-warning">
+                    ${{ "%.2f"|format(total_revenue) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card text-center">
+                <div class="stat-title">TOP 3 USERS</div>
+                {% if top_users %}
+                    {% for user in top_users %}
+                        <div class="top-user-item">{{ user.username }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-muted mt-2">No purchases yet</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD COURSE FORMA -->
+    <div class="form-card">
+        <h4 class="mb-4">Add New Course</h4>
+        <form method="POST" action="{{ url_for('add_course') }}">
+            <div class="mb-3">
+                <label class="form-label">Course Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input type="number" step="0.01" name="price" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-admin w-100">
+                Add Course
+            </button>
+        </form>
+    </div>
+
+    <!-- LISTA KURSEVA -->
+    <div class="course-list">
+        <h4 class="mb-4">Existing Courses</h4>
+        {% for course in courses %}
+        <div class="course-item">
+            <div>
+                <strong>{{ course.name }}</strong>
+                <div class="fw-bold small">
+                    ${{ "%.2f"|format(course.price) }}
+                </div>
+            </div>
+            <a href="{{ url_for('delete_course', course_id=course.id) }}"
+               class="btn btn-sm btn-danger">
+                Delete
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

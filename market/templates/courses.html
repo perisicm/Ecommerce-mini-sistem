@@ -9,7 +9,10 @@ body {
     color: #f1f1f1;
 }
 
-h1 { font-weight: 600; letter-spacing: 1px; }
+h1 { 
+    font-weight: 600; 
+    letter-spacing: 1px; 
+}
 
 .course-card {
     border: none;
@@ -86,14 +89,21 @@ h1 { font-weight: 600; letter-spacing: 1px; }
                             <div class="price-badge mb-3">
                                 ${{ "%.2f"|format(item.price) }}
                             </div>
-                            <button class="btn btn-success w-100 add-btn">
-                                Add to Cart
-                            </button>
+
+                            <!-- ADD TO CART FORMA -->
+                            <form method="POST" action="{{ url_for('add_to_cart', item_id=item.id) }}">
+                                <button type="submit" class="btn btn-success w-100 add-btn">
+                                    Add to Cart
+                                </button>
+                            </form>
+
                         </div>
                     </div>
 
                 </div>
             </div>
+            {% else %}
+                <p class="text-light text-center">No courses available.</p>
             {% endfor %}
         </div>
     </div>
