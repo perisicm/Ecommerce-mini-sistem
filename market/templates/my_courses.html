@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}My Courses{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-center text-light">My Courses</h1>
+
+    <div class="row mt-4">
+        {% for item in items %}
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100">
+
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                     class="card-img-top">
+
+                <div class="card-body text-center">
+
+                    <h5>{{ item.name }}</h5>
+                    <p>{{ item.description }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% else %}
+            <p class="text-center text-light">You have no courses yet.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

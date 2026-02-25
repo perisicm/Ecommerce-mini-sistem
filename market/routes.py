@@ -4,6 +4,7 @@ from flask import render_template, redirect, url_for, flash, session, request
 from market.models import Item, User
 from market.forms import RegisterForm, LoginForm
 from sqlalchemy import func
+from market.models import MyCourse
 
 
 @app.route('/')
@@ -35,8 +36,12 @@ def cart_page():
             total = sum(item.price for item in selected_items)
 
             if current_user.budget >= total:
+                for it in selected_items:
+                    db.session.add(MyCourse(user_id=current_user.id, item_id=it.id))
                 current_user.budget -= total
                 current_user.total_spent += total
+            
+            
                 db.session.commit()
 
                 session["cart"] = []
@@ -195,3 +200,12 @@ def delete_course(course_id):
 
     flash("Kurs obrisan.", "danger")
     return redirect(url_for('admin_dashboard'))
+
+@app.route('/my-courses')
+@login_required
+def my_courses():
+
+    courses = MyCourse.query.filter_by(user_id=current_user.id).all()
+    items = [c.item for c in courses]
+
+    return render_template('my_courses.html', items=items)
