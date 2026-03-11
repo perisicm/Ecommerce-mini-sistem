@@ -40,3 +40,47 @@ The project was created for learning and portfolio purposes. It demonstrates aut
 ---
 
 ## Project Structure
+
+## Installation and Setup
+Follow these steps to run the project locally.
+
+### 1. Clone the repository
+
+bash
+git clone https://github.com/perisicm/Ecommerce-mini-sistem.git
+cd Ecommerce-mini-sistem
+
+### 2. Create virtual environment
+
+bash
+python -m venv venv
+
+Activate the environment:
+
+Windows
+bash
+venv\Scripts\activate
+Linux / Mac
+bash
+source venv/bin/activate
+
+### 3. Install dependencies
+
+bash
+pip install -r requirements.txt
+
+### 4. Create database
+
+Run migrations to create the database and tables:
+bash
+flask db upgrade
+
+### 5. Run the application
+
+bash
+python app.py
+
+### 6. Open in browser
+
+Open the following address in your browser:
+http://127.0.0.1:5000
