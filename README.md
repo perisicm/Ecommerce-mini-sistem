@@ -83,4 +83,5 @@ python app.py
 ### 6. Open in browser
 
 Open the following address in your browser:
-http://127.0.0.1:5000
+http://127.0.0.1:5000 or http://localhost:5000
+
