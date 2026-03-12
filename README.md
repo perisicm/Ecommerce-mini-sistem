@@ -85,3 +85,25 @@ python app.py
 Open the following address in your browser:
 http://127.0.0.1:5000 or http://localhost:5000
 
+## Admin Access
+
+The application includes an administrator account used for managing courses and accessing the admin dashboard.
+
+If the admin account does not exist, it is automatically created when the application starts.
+
+Default admin credentials:
+Username: admin
+Password: admin123
+
+After logging in as an administrator, the user can:
+
+- Access the admin dashboard
+- Add new courses
+- Delete courses
+- View platform statistics
+- Monitor users and total revenue
+
+The administrator role is determined by the `is_admin` field in the user table.  
+If `is_admin = 1`, the user has administrator privileges.
+
+---
