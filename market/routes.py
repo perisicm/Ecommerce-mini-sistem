@@ -151,6 +151,7 @@ def admin_dashboard():
     total_revenue = db.session.query(func.sum(User.total_spent)).scalar() or 0
     top_users = User.query.order_by(User.total_spent.desc()).limit(3).all()
     courses = Item.query.all()
+    all_users = User.query.filter_by(is_admin=False).all()
 
     return render_template(
         "admin_dashboard.html",
@@ -158,7 +159,8 @@ def admin_dashboard():
         total_courses=total_courses,
         total_revenue=total_revenue,
         top_users=top_users,
-        courses=courses
+        courses=courses,
+        all_users=all_users
     )
 
 

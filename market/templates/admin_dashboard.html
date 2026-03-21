@@ -52,9 +52,9 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-.form-label { 
-    color: #ffffff; 
-    font-weight: 500; 
+.form-label {
+    color: #ffffff;
+    font-weight: 500;
 }
 
 .form-control {
@@ -63,8 +63,8 @@ body {
     color: #ffffff;
 }
 
-.form-control::placeholder { 
-    color: #bfc9d4; 
+.form-control::placeholder {
+    color: #bfc9d4;
 }
 
 .form-control:focus {
@@ -192,6 +192,41 @@ body {
             </a>
         </div>
         {% endfor %}
+    </div>
+
+    <!-- TABELA KORISNIKA -->
+    <div class="course-list mt-4">
+        <h4 class="mb-4">All Users</h4>
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Budget</th>
+                        <th>Total Spent</th>
+                        <th>Courses Bought</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in all_users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-bold text-success">{{ user.username }}</td>
+                        <td>{{ user.email_address }}</td>
+                        <td class="text-warning">${{ "%.2f"|format(user.budget) }}</td>
+                        <td class="text-info">${{ "%.2f"|format(user.total_spent) }}</td>
+                        <td>{{ user.my_courses|length }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No users yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
